@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "751178714156",
+    "firebase_url": "https://sl-post-card-app.firebaseio.com",
+    "project_id": "sl-post-card-app",
+    "storage_bucket": "sl-post-card-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:751178714156:android:e35cf6cb73a92fc061d589",
+        "android_client_info": {
+          "package_name": "com.lasithaprabodha.postcardapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "751178714156-5otv5a7infj9pkjg2a9crccj4ikjtak5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lasithaprabodha.postcardapp",
+            "certificate_hash": "52e81e89254c17dd4d1c9614990596734643ccca"
+          }
+        },
+        {
+          "client_id": "751178714156-mq5ljgljt4df0b6oh7m1um42t8g7dt9c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4rPMIUO4JpcSsrTThOZ1eeoVKA6rsa10"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "751178714156-mq5ljgljt4df0b6oh7m1um42t8g7dt9c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
