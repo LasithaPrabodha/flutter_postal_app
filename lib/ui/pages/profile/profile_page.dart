@@ -3,20 +3,17 @@ import 'dart:math';
 import 'package:alert_dialogs/alert_dialogs.dart';
 import 'package:firebase_auth_service/firebase_auth_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
-import 'package:yaalu/core/enums/genders.dart';
-import 'package:yaalu/core/enums/viewstate.dart';
-import 'package:yaalu/ui/common_widgets/avatar.dart';
 import 'package:yaalu/core/constants/keys.dart';
 import 'package:yaalu/core/constants/strings.dart';
+import 'package:yaalu/core/enums/viewstate.dart';
 import 'package:yaalu/core/models/user_reference_model.dart';
 import 'package:yaalu/core/services/firebase_storage_service.dart';
 import 'package:yaalu/core/services/firestore_database_service.dart';
 import 'package:yaalu/core/services/image_picker_service.dart';
+import 'package:yaalu/ui/common_widgets/avatar.dart';
 import 'package:yaalu/ui/common_widgets/base_widget.dart';
 import 'package:yaalu/ui/common_widgets/loading_scafold.dart';
 
@@ -28,15 +25,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  final TextEditingController _usernameController = TextEditingController();
-
-  @override
-  void dispose() {
-    _usernameController.dispose();
-    super.dispose();
-  }
-
-  Future<void> _signOut(BuildContext context) async {
+  Future<void> _signOut() async {
     try {
       final FirebaseAuthService auth =
           Provider.of<FirebaseAuthService>(context, listen: false);
@@ -60,7 +49,7 @@ class _ProfilePageState extends State<ProfilePage> {
         ) ??
         false;
     if (didRequestSignOut == true) {
-      await _signOut(context);
+      await _signOut();
     }
   }
 
@@ -83,12 +72,45 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget _buildUserInfo(UserReferenceModel model) {
     return Column(
       children: [
-        Avatar(
-          photoUrl: model.avatar,
-          radius: 50,
-          borderColor: Colors.black54,
-          borderWidth: 2.0,
-          onPressed: () => _chooseAvatar(model),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            SizedBox(
+              width: 50,
+              child: Wrap(
+                crossAxisAlignment: WrapCrossAlignment.center,
+                direction: Axis.vertical,
+                children: <Widget>[
+                  Text(
+                    model.likes.toString(),
+                    style: TextStyle(fontSize: 30),
+                  ),
+                  Text("stamps")
+                ],
+              ),
+            ),
+            Avatar(
+              photoUrl: model.avatar,
+              radius: 50,
+              borderColor: Colors.black54,
+              borderWidth: 2.0,
+              onPressed: () => _chooseAvatar(model),
+            ),
+            SizedBox(
+              width: 50,
+              child: Wrap(
+                crossAxisAlignment: WrapCrossAlignment.center,
+                direction: Axis.vertical,
+                children: <Widget>[
+                  Text(
+                    model.likes.toString(),
+                    style: TextStyle(fontSize: 30),
+                  ),
+                  Text("likes")
+                ],
+              ),
+            )
+          ],
         ),
         const SizedBox(height: 8),
         if (model.username != null)
@@ -101,113 +123,31 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget _buildButton(
-      {UserReferenceModel model, String gender, BoxDecoration decoration}) {
-    return Expanded(
-      child: InkWell(
-        onTap: () => model.updateGender(gender),
-        child: Container(
-          alignment: Alignment.center,
-          decoration: model.gender == gender ? decoration : null,
-          child: Text(
-            gender,
-            style: TextStyle(
-              color: model.gender == gender ? Colors.blueGrey : Colors.white,
-              fontSize: 16,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Future<DateTime> selectDate(UserReferenceModel model) async {
-    return await showDatePicker(
-      context: context,
-      initialDate: model.dob != '' ? DateTime.parse(model.dob) : DateTime.now(),
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
-    );
-  }
-
   Widget _buildContent(UserReferenceModel model) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        Text("Gender"),
-        SizedBox(height: 12),
         Container(
-          height: 30,
-          padding: EdgeInsets.all(3),
-          decoration: BoxDecoration(
-            color: Colors.blueGrey,
-            borderRadius: BorderRadius.all(Radius.circular(4)),
-          ),
+          height: 40,
           child: Row(
-            children: <Widget>[
-              _buildButton(
-                model: model,
-                gender: Gender.Male,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(4),
-                    topLeft: Radius.circular(4),
-                  ),
-                ),
-              ),
-              _buildButton(
-                model: model,
-                gender: Gender.Female,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                ),
-              ),
-              _buildButton(
-                model: model,
-                gender: Gender.NonBi,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(4),
-                    topRight: Radius.circular(4),
-                  ),
-                ),
-              ),
-            ],
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[Text("Gender"), Text(model.gender)],
           ),
         ),
-        SizedBox(height: 18),
-        Text("Birthday"),
-        SizedBox(height: 12),
         Container(
-          height: 30,
-          child: InkWell(
-            onTap: () async {
-              final DateTime picked = await selectDate(model);
-              if (picked != null) {
-                model.updateDob(DateFormat('yyyy-MM-dd').format(picked));
-              }
-            },
-            child: Text(model.dob != '' ? model.dob : "YYYY - MM - DD"),
+          height: 40,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[Text("Birthday"), Text(model.dob)],
           ),
         ),
-        SizedBox(height: 18),
-        Text("Username"),
-        TextField(
-          controller: _usernameController,
-          decoration: InputDecoration(
-            errorText: model.usernameErrorText,
-            enabled: model.state == ViewState.Idle,
+        Container(
+          height: 40,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[Text("Username"), Text(model.username)],
           ),
-          obscureText: false,
-          autocorrect: false,
-          keyboardAppearance: Brightness.light,
-          onChanged: model.updateUsername,
-          inputFormatters: <TextInputFormatter>[
-            model.usernameInputFormatter,
-          ],
-        ),
+        )
       ],
     );
   }
@@ -227,29 +167,17 @@ class _ProfilePageState extends State<ProfilePage> {
               appBar: AppBar(
                 title: Text(Strings.profile),
                 actions: <Widget>[
-                  model.formType == UserModelType.complete
-                      ? FlatButton(
-                          key: Key(Keys.save),
-                          child: Text(
-                            Strings.save,
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              color: Colors.white,
-                            ),
-                          ),
-                          onPressed: () => model.saveUser(),
-                        )
-                      : FlatButton(
-                          key: Key(Keys.logout),
-                          child: Text(
-                            Strings.logout,
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              color: Colors.white,
-                            ),
-                          ),
-                          onPressed: () => _confirmSignOut(),
-                        ),
+                  FlatButton(
+                    key: Key(Keys.logout),
+                    child: Text(
+                      Strings.logout,
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                    onPressed: () => _confirmSignOut(),
+                  )
                 ],
                 bottom: PreferredSize(
                   preferredSize: const Size.fromHeight(130.0),

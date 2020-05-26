@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:yaalu/ui/common_widgets/loading_scafold.dart';
 import 'package:yaalu/ui/common_widgets/photo_hero.dart';
 import 'package:yaalu/core/models/user_model.dart';
-import 'package:yaalu/ui/pages/profile/profile_page.dart';
+import 'package:yaalu/ui/pages/profile/complete_profile_page.dart';
 import 'package:yaalu/ui/router.dart';
 import 'package:yaalu/core/services/firestore_database_service.dart';
 
@@ -22,7 +22,7 @@ class HomeBuilder extends StatelessWidget {
           final UserModel userDetails = snapshot.data;
 
           if (userDetails?.username == null) {
-            return ProfilePage();
+            return CompleteProfilePage();
           }
 
           return HomePage();

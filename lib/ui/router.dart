@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:yaalu/ui/pages/letters/letters_page.dart';
+import 'package:yaalu/ui/pages/profile/complete_profile_page.dart';
 import 'package:yaalu/ui/pages/profile/profile_page.dart';
 import 'package:yaalu/ui/pages/settings/settings_page.dart';
 
 class Routes {
   static const profilePage = '/profile-page';
+  static const completeProfilePage = '/complete-profile-page';
   static const settingsPage = '/settings-page';
   static const lettersPage = '/letters-page';
 }
@@ -15,6 +17,12 @@ class Router {
       case Routes.profilePage:
         return MaterialPageRoute<dynamic>(
           builder: (_) => ProfilePage(),
+          settings: settings,
+          fullscreenDialog: true,
+        );
+      case Routes.completeProfilePage:
+        return MaterialPageRoute<dynamic>(
+          builder: (_) => CompleteProfilePage(),
           settings: settings,
           fullscreenDialog: true,
         );
