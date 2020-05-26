@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:yaalu/ui/common_widgets/loading_scafold.dart';
 import 'package:yaalu/ui/common_widgets/photo_hero.dart';
 import 'package:yaalu/core/models/user_model.dart';
-import 'package:yaalu/ui/pages/letters/letters_page.dart';
 import 'package:yaalu/ui/pages/profile/profile_page.dart';
 import 'package:yaalu/ui/router.dart';
 import 'package:yaalu/core/services/firestore_database_service.dart';
@@ -17,11 +17,7 @@ class HomeBuilder extends StatelessWidget {
         builder: (context, snapshot) {
           print('[stream user]');
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Scaffold(
-              body: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
+            return LoadingScafold();
           }
           final UserModel userDetails = snapshot.data;
 
@@ -131,9 +127,7 @@ class HomePage extends StatelessWidget {
                     padding: EdgeInsets.all(20),
                     child: _buildMailIcon(),
                     onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => LettersPage()),
-                      );
+                      Navigator.of(context).pushNamed(Routes.lettersPage);
                     },
                   ),
                 )

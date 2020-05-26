@@ -26,4 +26,14 @@ class UserModel {
       username: data['username'],
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'username': username,
+      'gender': gender,
+      'dob': dob,
+      'avatar': avatar,
+      'likes': likes,
+    };
+  }
 }

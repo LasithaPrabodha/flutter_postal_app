@@ -6,7 +6,7 @@ packages:
     description:
       path: "packages/alert_dialogs"
       ref: HEAD
-      resolved-ref: "359df3495104e8bdba7515e8c1b85c99618795a7"
+      resolved-ref: b5ce5b308f5092509efb3d377a2b94bda6352f99
       url: "https://github.com/LasithaPrabodha/lasitha_core_flutter_packages"
     source: git
     version: "0.0.1"
@@ -36,7 +36,7 @@ packages:
     description:
       path: "packages/auth_widget_builder"
       ref: HEAD
-      resolved-ref: "359df3495104e8bdba7515e8c1b85c99618795a7"
+      resolved-ref: b5ce5b308f5092509efb3d377a2b94bda6352f99
       url: "https://github.com/LasithaPrabodha/lasitha_core_flutter_packages"
     source: git
     version: "0.0.1"
@@ -108,7 +108,7 @@ packages:
     description:
       path: "packages/custom_buttons"
       ref: HEAD
-      resolved-ref: "359df3495104e8bdba7515e8c1b85c99618795a7"
+      resolved-ref: b5ce5b308f5092509efb3d377a2b94bda6352f99
       url: "https://github.com/LasithaPrabodha/lasitha_core_flutter_packages"
     source: git
     version: "0.0.1"
@@ -117,7 +117,7 @@ packages:
     description:
       path: "packages/email_password_sign_in_ui"
       ref: HEAD
-      resolved-ref: "71cc4f63203d9149820b4e61b40124db23274a77"
+      resolved-ref: b5ce5b308f5092509efb3d377a2b94bda6352f99
       url: "https://github.com/LasithaPrabodha/lasitha_core_flutter_packages"
     source: git
     version: "0.0.1"
@@ -147,7 +147,7 @@ packages:
     description:
       path: "packages/firebase_auth_service"
       ref: HEAD
-      resolved-ref: "359df3495104e8bdba7515e8c1b85c99618795a7"
+      resolved-ref: b5ce5b308f5092509efb3d377a2b94bda6352f99
       url: "https://github.com/LasithaPrabodha/lasitha_core_flutter_packages"
     source: git
     version: "0.0.1"
@@ -191,7 +191,7 @@ packages:
     description:
       path: "packages/firestore_service"
       ref: HEAD
-      resolved-ref: "8bdcd34b7f54e523c6b1f33d4f2daa7de9c89e07"
+      resolved-ref: b5ce5b308f5092509efb3d377a2b94bda6352f99
       url: "https://github.com/LasithaPrabodha/lasitha_core_flutter_packages"
     source: git
     version: "0.0.1"
@@ -402,7 +402,7 @@ packages:
     description:
       path: "packages/string_validators"
       ref: HEAD
-      resolved-ref: "359df3495104e8bdba7515e8c1b85c99618795a7"
+      resolved-ref: b5ce5b308f5092509efb3d377a2b94bda6352f99
       url: "https://github.com/LasithaPrabodha/lasitha_core_flutter_packages"
     source: git
     version: "0.0.1"

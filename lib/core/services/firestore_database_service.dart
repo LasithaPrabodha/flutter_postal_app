@@ -15,7 +15,7 @@ class FirestoreDatabaseService {
   final _service = FirestoreService.instance;
 
   // Save user on register
-  Future<void> saveUser(UserReferenceModel user) => _service.setData(
+  Future<void> saveUser(UserModel user) => _service.setData(
         path: FirestorePath.user(uid),
         data: user.toMap(),
         merge: true,

@@ -7,6 +7,7 @@ class Keys {
 
   static const String tabBar = 'tabBar';
   static const String logout = 'logout';
+  static const String save = 'save';
   static const String alertDefault = 'alertDefault';
   static const String alertCancel = 'alertCancel';
 }
