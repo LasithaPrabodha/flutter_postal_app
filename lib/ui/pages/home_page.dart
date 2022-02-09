@@ -65,6 +65,51 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  void _showWriteLetter(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Container(
+          padding: EdgeInsets.all(18),
+          height: 320,
+          child: Column(
+            children: [
+              // Row(
+              //   children: <Widget>[Text("To:"), Text("Gender"), Text("Age")],
+              // ),
+              TextField(
+                maxLines: 11,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Your message goes here',
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  FlatButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text("Cancel"),
+                  ),
+                  FlatButton(
+                    color: Colors.amberAccent,
+                    onPressed: () {},
+                    child: Text("Send"),
+                  )
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildBottomBar() {
     return BottomAppBar(
       shape: CircularNotchedRectangle(),
@@ -142,7 +187,9 @@ class HomePage extends StatelessWidget {
           Icons.edit,
           color: Colors.blueGrey,
         ),
-        onPressed: () {},
+        onPressed: () {
+          _showWriteLetter(context);
+        },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: _buildBottomBar(),

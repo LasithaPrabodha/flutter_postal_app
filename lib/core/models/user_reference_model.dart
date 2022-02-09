@@ -58,9 +58,11 @@ class UserReferenceModel extends AvatarReferenceModel with UserModelValidators {
   void updateDob(String dob) => updateWith(dob: dob);
   void updateGender(String gender) => updateWith(gender: gender);
 
-  void updateAvatar(File file) async {
+  Future<String> updateAvatar(File file) async {
     final avatar = await storage.uploadAvatar(file: file);
     updateWith(avatar: avatar);
+
+    return avatar;
   }
 
   void updateModelType(UserModelType type) {
@@ -89,20 +91,29 @@ class UserReferenceModel extends AvatarReferenceModel with UserModelValidators {
     return null;
   }
 
-  Future<void> saveUser() async {
+  Future<bool> saveUser() async {
     setState(ViewState.Busy);
 
     final user = UserModel(
-        avatar: avatar,
-        dob: dob,
-        gender: gender,
-        likes: likes,
-        username: username);
+      avatar: avatar,
+      dob: dob,
+      gender: gender,
+      likes: likes,
+      username: username,
+    );
 
-    final result = await this.fireDB.saveUser(user);
+    bool isAvail = await this.fireDB.isUsernameAvail(username);
+
+    if (isAvail) {
+      await this.fireDB.saveUsername(username);
+      await this.fireDB.saveUser(user);
+
+      setState(ViewState.Idle);
+      return true;
+    }
 
     setState(ViewState.Idle);
-    return result;
+    return false;
   }
 
   void updateLikes() => this.likes++;

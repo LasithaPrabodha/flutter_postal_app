@@ -1,12 +1,9 @@
 import 'dart:math';
 
-import 'package:alert_dialogs/alert_dialogs.dart';
-import 'package:firebase_auth_service/firebase_auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
 import 'package:yaalu/core/enums/genders.dart';
 import 'package:yaalu/core/enums/viewstate.dart';
@@ -29,6 +26,7 @@ class CompleteProfilePage extends StatefulWidget {
 
 class _CompleteProfilePageState extends State<CompleteProfilePage> {
   final TextEditingController _usernameController = TextEditingController();
+  final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   void dispose() {
@@ -43,7 +41,7 @@ class _CompleteProfilePageState extends State<CompleteProfilePage> {
       final file = await imagePicker.pickImage(source: ImageSource.gallery);
 
       if (file != null) {
-        model.updateAvatar(file);
+        await model.updateAvatar(file);
         // (optional) delete local file as no longer needed
         await file.delete();
       }
@@ -196,6 +194,7 @@ class _CompleteProfilePageState extends State<CompleteProfilePage> {
       builder: (_, model, __) => model.state == ViewState.Busy
           ? LoadingScafold()
           : Scaffold(
+              key: scaffoldKey,
               appBar: AppBar(
                 title: Text(Strings.profile),
                 actions: <Widget>[
